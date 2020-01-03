@@ -10,7 +10,5 @@ returns false / False for every other input.
 */
 
 function isIntArray(arr){
-  return Array.isArray(arr) && arr.every(item => {
-    return typeof item === 'number' && Number.isInteger(item);
-  });
+  return Array.isArray(arr) && arr.every(Number.isInteger);
 }
