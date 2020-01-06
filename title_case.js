@@ -21,21 +21,22 @@ titleCase('the quick brown fox') // should return: 'The Quick Brown Fox'
 /*
  * function titleCase(title, minorWords){}
  */
+
 function capitalize(word){
-  return word[0].toUpperCase() + word.slice(1);
+  if(word.length === 0) return word;
+  return word[0].toUpperCase() + word.slice(1).toLowerCase();
 }
 
 function titleCase(title, minorWords){
   minorWords = minorWords || '';
-  minorWords = minorWords.split(' ').map(word => word.toLowerCase());
+  minorWords = minorWords.toLowerCase().split(' ');
   minorWords = new Set(minorWords);
   title = title
+    .toLowerCase()
     .split(' ')
     .map((word, i) => {
-      if(word === '') return word;
-      word = word.toLowerCase();
-      if(!minorWords.has(word) || i === 0){
-        word = capitalize(word);
+      if(i === 0 || !minorWords.has(word)){
+        return capitalize(word);
       }
       return word;
     })
@@ -43,4 +44,4 @@ function titleCase(title, minorWords){
   return title;
 }
 
-console.log(titleCase('', ""))
+console.log(titleCase('the wind in the willows', "and the to in"))
